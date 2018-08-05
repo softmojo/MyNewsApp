@@ -57,7 +57,7 @@ public class NewsAdapter extends ArrayAdapter<Newsfeeds> {
 
             TextView authorName = listItemView.findViewById(R.id.author_name);
 
-            if(currentNewsfeed.getAuthorName()!= null){
+            if(!currentNewsfeed.getAuthorName().equals("")){
                 authorName.setText(currentNewsfeed.getAuthorName());
             }
             else{authorName.setVisibility(View.GONE);}

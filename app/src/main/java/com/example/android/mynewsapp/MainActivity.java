@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     private static final int NEWS_LOADER_ID = 1;
 
-    private static final String REQUEST_URL = "https://content.guardianapis.com/search?api-key=9761653b-1dc4-4c86-9815-0799a59094e6&show-references=author&show-fields=thumbnail&section=football&page-size=8";
+    private static final String REQUEST_URL = "https://content.guardianapis.com/search?api-key=9761653b-1dc4-4c86-9815-0799a59094e6&show-tags=contributor&show-fields=thumbnail&section=football&page-size=8";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         mProgressBar = findViewById(R.id.progress_bar);
 
         // Find a reference to the {@link ListView} in the layout
-        ListView mNewsListView = (ListView) findViewById(R.id.list);
+        ListView mNewsListView = findViewById(R.id.list);
 
         mNewsListView.setEmptyView(mEmptyStateTextView);
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
 
         }else{
             mProgressBar.setVisibility(View.GONE);
-            mEmptyStateTextView.setText("No internet connection");
+            mEmptyStateTextView.setText(R.string.no_internet);
         }
 
         mNewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,11 +85,11 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
                 // Create a new intent to view the newsfeed URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, webURL);
 
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
+                if (websiteIntent.resolveActivity(getPackageManager()) != null) {
+                    // Send the intent to launch a new activity
+                    startActivity(websiteIntent);
+                }
             }
-
-
         });
 
     }

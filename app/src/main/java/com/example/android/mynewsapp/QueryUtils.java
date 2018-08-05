@@ -20,13 +20,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by pc on 7/31/2018.
- */
 
-/**
- * Helper methods related to requesting and receiving news data.
- */
+//Helper methods related to requesting and receiving news data.
 
 public class QueryUtils {
 
@@ -159,11 +154,16 @@ public class QueryUtils {
                 String thumbnailUrl = thumbnailObject.getString("thumbnail");
                 Bitmap newsfeedThumbnail = getNewsfeedThumbnail(thumbnailUrl);
 
+                JSONArray tagsArray = currentNewsfeed.optJSONArray("tags");
+                JSONObject tagsObject = tagsArray.optJSONObject(0);
+                String authorTitle = tagsObject.optString("webTitle");
+
                 // Create a new {@link newsfeeds} object with the sectionName, webTitle, url,
                 // and url from the JSON response.
                 Newsfeeds newsfeed = new Newsfeeds(sectionName, webTitle, webUrl);
                 newsfeed.setPublicationDate(webPublicationDate);
                 newsfeed.setThumbnail(newsfeedThumbnail);
+                newsfeed.setAuthorName(authorTitle);
 
                 // Add the new {@link newsfeeds} to the list of newsfeeds.
                 newsfeeds.add(newsfeed);

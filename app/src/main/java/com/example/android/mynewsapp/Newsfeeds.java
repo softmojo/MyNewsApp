@@ -11,7 +11,7 @@ public class Newsfeeds {
     private String mWebTitle;
     private String mWebUrl;
     private String mWebPublicationDate;
-    private String mAuthorName = null;
+    private String mAuthorName = "";
     private Bitmap mThumbnail = null;
 
     public Newsfeeds(String sectionName, String webTitle, String webUrl){
